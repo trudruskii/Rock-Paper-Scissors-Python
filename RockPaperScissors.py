@@ -3,6 +3,8 @@
 # Email: aspencer22@cnm.edu
 # Date: 09/07/2024
 # Purpose: Create a program that will play a game of rock paper scissors with a user.
+# The program keeps track of the user's score, the computer's score, the number of ties, and the number of rounds.
+# The game continues until the user decides to stop playing.
 # Python Version: 3.12.5
 
 # import random module to generate random choices from the list
@@ -14,7 +16,7 @@ import time
 print('Ready to play a game of rock, paper, scissors?')
 print('To get started: ')
 
-# Initialize variables to keep score
+# Initialize variables for keeping score
 user_score = 0
 cpu_score = 0
 rounds_played = 0
@@ -25,25 +27,26 @@ choices = ["rock", "paper", "scissors"]
 
 # Loop that continues until user decides to stop playing
 while True:
-    # Reset scores for the new game
+    # Reinitialize the score variables if user decides to play again
     user_score = 0
     cpu_score = 0
 
-    # Loop that will play until either the user or computer has won 2 games
+    # Loop that continues until either the user or computer has won 2 games
     while user_score < 2 and cpu_score < 2:
         rounds_played += 1
-        # Get the user's choice to start the game and convert it to lowercase for case insensitivity
+        # Get user's choice to start game and convert it to lowercase for case insensitivity
         user_choice = input("Enter your choice (rock, paper, or scissors): ").lower()
 
-        # if user enters an invalid choice, prompt them to enter a valid choice
+        # if user enters an invalid choice, prompt user to choose a valid choice
         if user_choice not in choices:
             print("Invalid choice. Please enter 'rock', 'paper', or 'scissors'.")
             continue
-
+        # Add delay for a more interactive experience
+        time.sleep(1.2)
         # Get the computer's choice using the random.choice() method
         computer_choice = random.choice(choices)
 
-        # Display both user and computer choices for the user
+        # Display both user and computer choices each round
         print("You chose:", user_choice)
         print("Computer chose:", computer_choice)
 
@@ -51,22 +54,22 @@ while True:
         # If the user and computer choices are the same, it's a tie
         if user_choice == computer_choice:
             print("It's a tie!")
-            # Increment the tie counter by 1
+            # Increment the ties variable by 1
             ties += 1
         # If user chooses rock and computer chooses scissors, user wins the round
         elif user_choice == "rock" and computer_choice == "scissors":
             print("You win!")
-            # Increment user score by 1
+            # Increment user score variable by 1
             user_score += 1
         # If user chooses paper and computer chooses rock, user wins the round
         elif user_choice == "paper" and computer_choice == "rock":
             print("You win!")
-            # Increment user score by 1
+            # Increment user score variable by 1
             user_score += 1
         # If user chooses scissors and computer chooses paper, user wins the round
         elif user_choice == "scissors" and computer_choice == "paper":
             print("You win!")
-            # Increment user score by 1
+            # Increment user score variable by 1
             user_score += 1
         # If none of the above conditions are met, computer wins the round
         else:
@@ -80,8 +83,9 @@ while True:
             print("Your score:", user_score, '| ' + "Computer score:", cpu_score)
             print(' '*5, "Ties:", ties, '| ' + "Round:", rounds_played)
             # Add a delay before the next round for a more interactive experience
-            print('Next round starting in 1.5 seconds...')
+            print('Next round in 1.5 seconds...')
             time.sleep(1.5)
+    # Add a delay before the final results are displayed for a more interactive experience
     time.sleep(2.5)
     # Print the final score
     print("\nGame over! Here is the final results:")
